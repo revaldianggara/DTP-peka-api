@@ -1,0 +1,73 @@
+<section>
+        <md-sidenav class="md-sidenav-left flipped" md-component-id="left" md-disable-backdrop md-whiteframe="4" layout="row">
+            <md-list class="unflipped" flex>
+                <md-list-item ng-click="toggle.list1 = !toggle.list1">
+                    <md-icon class='menuicon' md-svg-src="img/icons/noun_Machine Learning_1428746.svg"></md-icon>
+                    <span style="color: mediumpurple;" flex><strong>Prediksi</strong></span>
+                    <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!toggle.list1"></md-icon>
+                    <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="toggle.list1"></md-icon>
+                </md-list-item>
+                <div ng-slide-down="toggle.list1" duration="0.3">
+                    <md-list class="main-repeater" flex  ng-scroll-end="bottomPred()">
+                        <md-list-item class="md-dense itemlist" ng-repeat="item in predDateGroup">
+                            <span flex-offset="5" ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'white'}">{{item.psd}} - {{item.ped}}</span>
+                            <md-checkbox class="md-secondary" ng-model="item.check" ng-change="predItemCheck(item.tid)"></md-checkbox>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <md-list-item ng-click="toggle.list2 = !toggle.list2">
+                    <md-icon class='menuicon' md-svg-src="img/icons/local_fire_department-24px.svg"></md-icon>
+                    <span style="color: lightcoral;" flex><strong>Hotspot Satelit</strong></span>
+                    <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!toggle.list2"></md-icon>
+                    <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="toggle.list2"></md-icon>
+                </md-list-item>
+                <div ng-slide-down="toggle.list2" lazy-render duration="0.3">
+                    <md-list class="main-repeater2" flex ng-scroll-end="bottomHS()">
+                        <md-list-item class="md-dense itemlist" ng-repeat="item in hsDateGroup">
+                            <span flex-offset="5" ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'white'}">{{item.psd}} - {{item.ped}}</span>
+                            <md-checkbox class="md-secondary" ng-model="item.check" ng-change="hsItemCheck(item.tid)"></md-checkbox>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <md-list-item ng-click="toggle.list3 = !toggle.list3">
+                    <md-icon class='menuicon' md-svg-src="img/icons/noun_forest_2421079.svg"></md-icon>
+                    <span style="color: aquamarine;" flex><strong>Devegetasi</strong></span>
+                    <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!toggle.list3"></md-icon>
+                    <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="toggle.list3"></md-icon>
+                </md-list-item>
+                <div ng-slide-down="toggle.list3" lazy-render duration="0.3">
+                    <md-list class="main-repeater2" flex  ng-scroll-end="bottomVeg()">
+                        <md-list-item class="md-dense itemlist" ng-repeat="item in vegDateGroup">
+                            <span flex-offset="5" ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'white'}">{{item.psd}} - {{item.ped}}</span>
+                            <md-checkbox class="md-secondary" ng-model="item.check" ng-change="vegItemCheck(item.tid)"></md-checkbox>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <md-list-item ng-click="toggle.list4 = !toggle.list4">
+                        <md-icon class='menuicon' md-svg-src="img/icons/miscellaneous_services-24px.svg"></md-icon>
+                        <span style="color: darkgray;" flex><strong>Miscellaneous </strong></span>
+                        <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!toggle.list4"></md-icon>
+                        <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="toggle.list4"></md-icon>
+                    </md-list-item>
+                    <div ng-slide-down="toggle.list4" lazy-render duration="0.3">
+                        <md-list class="main-repeater2" flex >
+                            <md-list-item class="md-dense itemlist" ng-repeat="item in miscDateGroup">
+                                <span flex-offset="5" ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'white'}">{{item.psd}} - {{item.ped}}</span>
+                                <md-checkbox class="md-secondary" ng-model="item.check"></md-checkbox>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+            </md-list>
+        </md-sidenav>
+        <div ng-repeat="ftid in ifdw">
+            <div id="{{ftid.peid}}" class='ol-popup'>
+                <div id="popup-content">
+                    <p class='phead'>{{ftid.type}} <md-icon class='popup-close' md-svg-src="img/icons/close-24px.svg" ng-click="closePopup(ftid.peid)"></md-icon></p>
+                    <p class='pcont'>Tanggal Mulai: {{ftid.datestr}}</p>
+                    <p class='pcont'>Tanggal Selesai: {{ftid.datestp}}</p>
+                    <p class='pcont'>Keyakinan: {{ftid.conf}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    

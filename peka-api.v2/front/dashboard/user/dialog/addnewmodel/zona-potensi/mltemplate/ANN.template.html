@@ -1,0 +1,112 @@
+<md-dialog aria-label="anndialog" style="min-width: 400px;">
+    <form>
+        <div aria-label="addnewinputdialog" class="modal-header text-center theme">
+            <div class="close-modal">
+                <md-button class="md-icon-button">
+                    <md-icon md-svg-src="assets/images/custom_icons/exit.svg" aria-label="Close dialog"
+                        ng-click="cancelAddModel()">
+                    </md-icon>
+                </md-button>
+            </div>
+            <h3 class="head">Config Model</h3>
+        </div>
+        <br>
+
+        <md-dialog-content>
+            <md-content class="md-padding dialogcontainerspace dialogicon" style="background-color: white !important;">
+                <form name="configform">
+                    <div layout="column" style="margin-left: 30px;">
+
+                        <div class="row">
+                            <label class="col-sm-5 content-modal">Number of layer</label>
+                            <div class="col-sm-6 content-modal">
+                                <input class="input-bordered" ng-model="mltype.layers" type="number" step="1">
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <!-- <md-input-container flex="100"
+                            style="margin-top: 24px !important;margin-bottom: 0px !important;">
+                            <label>Number of layer:</label>
+                            <input ng-model="mltype.layers" type="number" step="1">
+                        </md-input-container> -->
+
+                        <div class="row">
+                            <label class="col-sm-5 content-modal">Number of node</label>
+                            <div class="col-sm-6 content-modal">
+                                <input class="input-bordered" ng-model="mltype.nodes" type="number" step="8">
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <!-- <md-input-container flex="100"
+                            style="margin-top: 0px !important;margin-bottom: 0px !important;">
+                            <label>Number of node:</label>
+                            <input ng-model="mltype.nodes" type="number" step="8">
+                        </md-input-container> -->
+
+                        <div class="row">
+                            <label class="col-sm-5 content-modal">Epoch</label>
+                            <div class="col-sm-6 content-modal">
+                                <input class="input-bordered" ng-model="mltype.epoch" type="number" step="1">
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <!-- <md-input-container flex="100"
+                            style="margin-top: 0px !important;margin-bottom: 0px !important;">
+                            <label>Epoch:</label>
+                            <input ng-model="mltype.epoch" type="number" step="1">
+                        </md-input-container> -->
+
+                        <div class="row">
+                            <label class="col-sm-5 content-modal">Batch Size</label>
+                            <div class="col-sm-6 content-modal">
+                                <input class="input-bordered" ng-model="mltype.batchsize" type="number" step="8">
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <!-- <md-input-container flex="100"
+                            style="margin-top: 0px !important;margin-bottom: 0px !important;">
+                            <label>Batch size:</label>
+                            <input ng-model="mltype.batchsize" type="number" step="8">
+                        </md-input-container> -->
+<!-- 
+                        <div class="row">
+                            <label class="col-sm-5 content-modal">Validation Split</label>
+                            <div class="col-sm-6 content-modal">
+                                <md-select ng-model="mltype.val_split" class="input-bordered">
+                                    <md-option value=0.2>0.2</md-option>
+                                    <md-option value=0.3>0.3</md-option>
+                                </md-select>
+                            </div>
+                        </div> -->
+
+                        <div class="row">
+                            <label class="col-sm-5 content-modal">Accuracy</label>
+                            <div class="col-sm-6 content-modal">
+                                <md-select ng-model="mltype.metrics" class="input-bordered">
+                                    <md-option value="accuracy">Accuracy</md-option>
+                                    <md-option value="binary_accuracy">Binary Accuracy</md-option>
+                                    <md-option value="confusion_matrix">Confusion Matrix</md-option>
+                                </md-select>
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <!-- <md-input-container flex="100"
+                            style="margin-top: 0px !important;margin-bottom: 0px !important;">
+                            <label>Metrics:</label>
+                            <md-select ng-model="mltype.metrics">
+                                <md-option value="accuracy">Accuracy</md-option>
+                                <md-option value="binary_accuracy">Binary Accuracy</md-option>
+                                <md-option value="confusion_matrix">Confusion Matrix</md-option>
+                            </md-select>
+                        </md-input-container> -->
+                    </div>
+                </form>
+            </md-content>
+        </md-dialog-content>
+    </form>
+</md-dialog>

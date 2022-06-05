@@ -1,0 +1,200 @@
+<div class="page" ng-controller="verifCtrl">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default panel-minimal" style="border-radius: 10px !important">
+        <div class="panel-map-boundingbox map2">
+          <div ng-map id="map_verif" style="height: 100% !important">
+            <img class="opendata" src="assets/images/custom_icons/webgis/open-dataMap.svg" ng-click="showData()">
+            <div class="panel-opendata" md-whiteframe="4" ng-show="visibleData" style="height: 85% !important;">
+              <!-- <md-list> -->
+              <img src="assets/images/custom_icons/webgis/close-circle.svg"
+                style="margin-left: 15px; margin-top: 20px; cursor: pointer;" ng-click="close()">
+
+              <md-list-item ng-click="toggle.list8 = !toggle.list8">
+                <!-- <md-icon class='menuicon' md-svg-src="assets/images/custom_icons/webgis/error-24px.svg"></md-icon> -->
+                <span class="txt-poppins-12 grey-head-item">Penanganan</span>
+                <md-icon style="z-index: 1000; margin-right: 90px !important;"
+                  md-svg-src="assets/images/custom_icons/webgis/arrow-penanganan.svg" ng-click="addAction();" flex>
+                </md-icon>
+                <img src="assets/images/custom_icons/webgis/expand-more-circle.svg" ng-show="!toggle.list8"></img>
+                <img src="assets/images/custom_icons/webgis/expand-less-circle.svg" ng-show="toggle.list8"></img>
+              </md-list-item>
+              <div ng-slide-down="toggle.list8" duration="0.3">
+                <md-list class="main-repeater2" flex ng-scroll-end="bottomRec()">
+                  <md-list-item class="md-dense itemlist bg-md-list" ng-repeat="item in recDateGroup">
+                    <input class="custom-checkbox" type="checkbox" ng-model="item.check"
+                      ng-change="actionItemCheck(item.id)">
+                    <span class="txt-inter-11" flex-offset="5"
+                      ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'#020D51'}">{{item.psd}}</span>
+                  </md-list-item>
+                </md-list>
+              </div>
+
+              <md-list-item ng-click="toggle.list1 = !toggle.list1">
+                <span class="txt-poppins-12 grey-head-item" flex>Prediksi</span>
+                <img src="assets/images/custom_icons/webgis/expand-more-circle.svg" ng-show="!toggle.list1" />
+                <img src="assets/images/custom_icons/webgis/expand-less-circle.svg" ng-show="toggle.list1" />
+              </md-list-item>
+
+              <div ng-slide-down="toggle.list1" duration="0.3">
+                <md-list-item ng-click="toggle.list2 = !toggle.list2" style="margin-top: -15px; margin-left: 10px">
+                  <span class="txt-poppins-12 grey-head-item" flex>Potensi Hotspot</span>
+                  <img src="assets/images/custom_icons/webgis/expand-more-circle.svg" ng-show="!toggle.list2"
+                    style="margin-right: 20px" />
+                  <img src="assets/images/custom_icons/webgis/expand-less-circle.svg" ng-show="toggle.list2"
+                    style="margin-right: 20px" />
+                </md-list-item>
+              </div>
+
+              <div ng-slide-down="toggle.list1 && toggle.list2 " duration="0.3">
+                <md-list class="main-repeater" flex ng-scroll-end="bottomPred()">
+                  <button class="btn-theme-30" ng-click="chooseModel($event);">
+                    <span><img src="assets/images/custom_icons/webgis/arrow-down-circle.svg" /></span>
+                    <span style="margin-top: -10px">Pilih Model</span>
+                  </button>
+                  <span><img src="assets/images/custom_icons/calendar.svg" /></span>
+                  <md-list-item class="md-dense itemlist bg-md-list" ng-repeat="item in predDateGroup">
+                    <input class="custom-checkbox" type="checkbox" ng-model="item.check"
+                      ng-change="predItemCheck(item.tid)" />
+                    <span class="txt-inter-11" flex-offset=" 5"
+                      ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'#020d51'}">{{item.psd}} -
+                      {{item.ped}} </span>
+                  </md-list-item>
+                </md-list>
+              </div>
+
+              <div ng-slide-down="toggle.list1" duration="0.3">
+                <md-list-item ng-click="toggle.list3 = !toggle.list3" style="margin-top: -15px; margin-left: 10px">
+                  <span class="txt-poppins-12 grey-head-item" flex>Zona Potensi</span>
+                  <img src="assets/images/custom_icons/webgis/expand-more-circle.svg" ng-show="!toggle.list3"
+                    style="margin-right: 20px" />
+                  <img src="assets/images/custom_icons/webgis/expand-less-circle.svg" ng-show="toggle.list3"
+                    style="margin-right: 20px" />
+                </md-list-item>
+              </div>
+              <!-- start -->
+              <div ng-slide-down="toggle.list1 && toggle.list3" duration="0.3">
+                <md-list class="main-repeater" flex ng-scroll-end="bottomPred()">
+                  <button class="btn-theme-30" ng-click="chooseModel($event);">
+                    <span><img src="assets/images/custom_icons/webgis/arrow-down-circle.svg" /></span>
+                    <span style="margin-top: -10px">Pilih Model</span>
+                  </button>
+                  <span><img src="assets/images/custom_icons/calendar.svg" /></span>
+                  <md-list-item class="md-dense itemlist bg-md-list" ng-repeat="item in predDateGroup">
+                    <input class="custom-checkbox" type="checkbox" ng-model="item.check"
+                      ng-change="predItemCheck(item.tid)" />
+                    <span flex-offset=" 5" class="txt-inter-11"
+                      ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'#020d51'}">{{item.psd}} -
+                      {{item.ped}} </span>
+                  </md-list-item>
+                </md-list>
+              </div>
+              <!-- end -->
+              <hr style="margin-top: -2px; margin-bottom: -5px" />
+
+              <md-list-item ng-click="toggle.list4 = !toggle.list4">
+                <span class="txt-poppins-12 grey-head-item" flex>Hotspot Satelit</span>
+                <img src="assets/images/custom_icons/webgis/expand-more-circle.svg" ng-show="!toggle.list4" />
+                <img src="assets/images/custom_icons/webgis/expand-less-circle.svg" ng-show="toggle.list4" />
+              </md-list-item>
+
+              <div ng-slide-down="toggle.list4" lazy-render duration="0.3">
+                <md-list class="main-repeater2" flex ng-scroll-end="bottomHS()">
+                  <md-list-item class="md-dense itemlist bg-md-list" ng-repeat="item in hsDateGroup">
+                    <input class="custom-checkbox" type="checkbox" ng-model="item.check"
+                      ng-change="hsItemCheck(item.tid)" />
+                    <span flex-offset="5" class="txt-inter-11"
+                      ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'#020d51'}">{{item.psd}} -
+                      {{item.ped}}</span>
+                  </md-list-item>
+                </md-list>
+              </div>
+              <hr style="margin-top: -5px; margin-bottom: -5px" />
+
+              <md-list-item ng-click="toggle.list5 = !toggle.list5">
+                <span class="txt-poppins-12 grey-head-item" flex>Devegetasi</span>
+                <img src="assets/images/custom_icons/webgis/expand-more-circle.svg" ng-show="!toggle.list5" />
+                <img src="assets/images/custom_icons/webgis/expand-less-circle.svg" ng-show="toggle.list5" />
+              </md-list-item>
+
+              <div ng-slide-down="toggle.list5" lazy-render duration="0.3">
+                <md-list class="main-repeater2" flex ng-scroll-end="bottomVeg()">
+                  <md-list-item class="md-dense itemlist bg-md-list" ng-repeat="item in vegDateGroup">
+                    <input class="custom-checkbox" type="checkbox" ng-model="item.check"
+                      ng-change="vegItemCheck(item.tid)" />
+                    <span flex-offset="5" class="txt-inter-11"
+                      ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'#020d51'}">{{item.psd}} -
+                      {{item.ped}}</span>
+                  </md-list-item>
+                </md-list>
+              </div>
+              <hr style="margin-top: -5px; margin-bottom: -5px" />
+
+              <md-list-item ng-click="toggle.list6 = !toggle.list6">
+                <!-- <md-icon class='menuicon' md-svg-src="assets/images/custom_icons/webgis/satellite-white-36dp.svg"></md-icon> -->
+                <span class="txt-poppins-12 grey-head-item" flex>Citra Resolusi Rendah</span>
+                <img src="assets/images/custom_icons/webgis/expand-more-circle.svg" ng-show="!toggle.list6" />
+                <img src="assets/images/custom_icons/webgis/expand-less-circle.svg" ng-show="toggle.list6" />
+              </md-list-item>
+
+              <div ng-slide-down="toggle.list6" lazy-render duration="0.3">
+                <md-list class="main-repeater2" flex ng-scroll-end="bottomModis()">
+                  <md-list-item class="md-dense itemlist bg-md-list" ng-repeat="item in modisDateGroup">
+                    <input class="custom-checkbox" type="checkbox" ng-model="item.check"
+                      ng-change="modisItemCheck(item.ur, item.name)" />
+
+                    <span flex-offset="5" class="txt-inter-11 blue-item">{{item.name}}</span>
+                  </md-list-item>
+                </md-list>
+              </div>
+              <hr style="margin-top: -5px; margin-bottom: -5px" />
+
+              <md-list-item ng-click="toggle.list7 = !toggle.list7">
+                <!-- <md-icon class='menuicon' md-svg-src="assets/images/custom_icons/webgis/satellite-white-36dp.svg"></md-icon> -->
+                <span class="txt-poppins-12 grey-head-item" flex>Citra Resolusi Menengah</span>
+                <img src="assets/images/custom_icons/webgis/expand-more-circle.svg" ng-show="!toggle.list7" />
+                <img src="assets/images/custom_icons/webgis/expand-less-circle.svg" ng-show="toggle.list7" />
+              </md-list-item>
+
+              <div ng-slide-down="toggle.list7" lazy-render duration="0.3">
+                <md-list class="main-repeater2" flex ng-scroll-end="bottomLandsat()">
+                  <md-list-item class="md-dense itemlist bg-md-list" ng-repeat="item in landsatDateGroup">
+                    <input class="custom-checkbox" type="checkbox" ng-model="item.check"
+                      ng-change="landsatItemCheck(item.ur, item.name)" />
+                    <span flex-offset="5" class="txt-inter-11 blue-item">{{item.name}}</span>
+                  </md-list-item>
+                </md-list>
+              </div>
+
+
+            </div>
+
+            <!-- popup -->
+            <md-sidenav class="md-sidenav-right" md-component-id="right" md-disable-backdrop md-theme="{{hs.typeid}}">
+              <md-toolbar class="md-toolbar-tools">
+                <span class=" md-headline" flex>{{hs.type}}</span>
+                <img src="assets/images/custom_icons/close.svg" class="close-detail" ng-click="closeDetail()">
+              </md-toolbar>
+              <div class="hotspot-info">
+                <br>
+                <p>Koordinat : <b>{{hs.coord}}</b></p>
+                <p ng-show="hs.typeid === 'Veg'">Tanggal Devegetasi: </p>
+                <p ng-show="hs.typeid === 'predHS'">Prediksi Waktu Kejadian: </p>
+                <p ng-show="hs.typeid === 'HS'">Tanggal Hotspot: <b>{{hs.datestr}} s/d {{hs.datestp}}</b> </p>
+                <!-- <p ng-show="hs.typeid !== 'rec'"></p> -->
+                <p ng-show="hs.typeid !== 'rec'">Probabilitas : <b>{{hs.conf}}%</b></p>
+                <p ng-show="hs.typeid === 'rec'">Waktu: {{hs.datestr}}</p>
+                <p ng-show="hs.typeid === 'rec'">Keterangan: </p>
+                <p ng-show="hs.typeid === 'rec'"><b>{{hs.info}}</b></p>
+                <p ng-show="hs.typeid === 'rec'">Penanganan: </p>
+                <p ng-show="hs.typeid === 'rec'"><b>{{hs.act}}</b></p>
+              </div>
+            </md-sidenav>
+            <!-- </div> -->
+            <!-- end webgis -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

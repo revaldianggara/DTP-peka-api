@@ -1,0 +1,20 @@
+<section>
+    <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+        <md-content>
+            <div layout="column">
+                <md-list flex>
+                    <md-list-item ng-click='activeMenu="webgis"'>
+                        <span>Prediksi Spasial</span>
+                    </md-list-item>
+                    <md-list-item ng-click='activeMenu="tma"'>
+                        <span>Prediksi TMA</span>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </md-content>
+    </md-sidenav>
+    <div ng-show="activeMenu == 'webgis'" ng-map id="map" class="map"></div>
+    <div ng-show="activeMenu == 'tma'">
+        <iframe style="width:100%; height:90vh;" ng-src="{{detailFrame}}"></iframe>
+    </div>
+</section>

@@ -1,0 +1,86 @@
+<md-dialog-content style="overflow: hidden;">
+    <div class="modal-header text-center head-modal-bordered theme">
+        <div class="close-modal" style="height: fit-content;">
+            <md-button class="md-icon-button" ng-click="cancelAddModel()">
+                <md-icon md-svg-src="assets/images/custom_icons/exit.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+        <h3 class="head">Edit Model</h3>
+    </div>
+</md-dialog-content>
+
+<md-dialog-content>
+    <div class="modal-body datainput" style="margin-left: 30px;">
+        <br>
+        <div class="row">
+            <label class="col-sm-5 content-modal">Nama Model</label>
+            <div class="col-sm-6 " style="margin-left: -15px; width: 260px;">
+                <input disabled type="text" class="form-control input-bordered" md-no-asterisk ng-model="newModel.name">
+            </div>
+        </div>
+        <br><br>
+
+        <div class="row">
+
+            <label class="col-sm-5 content-modal">Input Feature</label>
+            <div class="col-sm-3 input-bordered-chip" style="background: #EEEEEE;">
+                <md-chips>
+                    <md-chip class="content-modal" ng-repeat="chip in newModel.input" readonly="true">{{chip}}
+                    </md-chip>
+                </md-chips>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <label class="col-sm-5 content-modal" style="margin-top: 10px;">Output Feature</label>
+            <div class="col-sm-3">
+                <md-chips input-aria-label="Output Feature" input-aria-describedby="staticChipsNote">
+                    <md-chip>Hotspot</md-chip>
+                </md-chips>
+            </div>
+        </div>
+        <br><br>
+
+        <div class="row">
+            <label class="col-sm-5 content-modal" style="margin-top: 10px;">Tahun Data</label>
+            <div class="col-sm-4 input-bordered-chip" style="background: #EEEEEE;">
+                <md-chips>
+                    <md-chip ng-repeat="chip in newModel.tyears" readonly="true">{{chip}}</md-chip>
+                </md-chips>
+            </div>
+        </div>
+        <br><br>
+
+        <div class="row">
+            <label class="col-sm-5 content-modal" style="margin-top: 10px;">Output Timestamp (forward)</label>
+            <div class="col-sm-6" style="margin-left: -15px; width: 260px;">
+                <input class=" input-bordered" md-no-asterisk ng-model=" newModel.outputts" type="number" step="1"
+                    disabled>
+            </div>
+        </div>
+        <br><br>
+
+        <div class="row">
+            <label class="col-sm-5 content-modal" style="margin-top: 5px;">Tipe Machine Learning</label>
+            <div class="col-sm-5">
+                <input class="input-bordered" md-no-asterisk ng-model="newModel.mltype" disabled>
+            </div>
+            <div class="col-sm-1" style="text-transform: none;">
+                <md-button ng-click="mlConfig($event)"
+                    style="min-width: 36px !important;margin-bottom: 24px !important; margin-left: -10px;">
+                    <i class="ti ti-settings"></i>
+                </md-button>
+            </div>
+        </div>
+    </div>
+
+</md-dialog-content>
+<md-dialog-content style="overflow: hidden;">
+    <div class="modal-footer btn-footer">
+        <button class="btn btn-primary btn-bordered" disabled aria-label="Add new input feature"
+            style="margin-left: -100px !important;">
+            <span>Edit</span>
+        </button>
+    </div>
+</md-dialog-content>

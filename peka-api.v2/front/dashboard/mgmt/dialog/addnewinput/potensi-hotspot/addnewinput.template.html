@@ -1,0 +1,68 @@
+<div aria-label="addnewinputdialog" class="modal-header text-center theme modal-header-border">
+        <div class="close-modal">
+                <md-button class="md-icon-button">
+                        <md-icon md-svg-src="assets/images/custom_icons/exit.svg" aria-label="Close dialog"
+                                ng-click="cancelAddInputFeature()">
+                        </md-icon>
+                </md-button>
+        </div>
+        <h3 class="head">Input Fitur Baru</h3>
+</div>
+<br>
+
+<div class="modal-body panel-content-modal" style="margin-left: 30px;">
+
+        <div class="row form-group">
+                <label class="col-sm-4 panel-content-modal">Pilih Fitur</label>
+                <div class="col-sm-4">
+                        <md-select class="input-bordered panel-content-modal" required md-no-asterisk
+                                ng-model="inputfeature.name" md-on-open="loadFeature()" ng-change="checkPeriod()">
+                                <md-option ng-value="inpf.name" ng-repeat="inpf in features">{{inpf.name}}</md-option>
+                        </md-select>
+                </div>
+                <div class="col-sm-2">
+                        <md-icon md-svg-src="assets/images/custom_icons/add-circle.svg" aria-label="Close dialog"
+                                ng-click="addNewInputFeatureName($event)" style="margin-left: 20px; margin-top: -10px;">
+                        </md-icon>
+                </div>
+        </div>
+
+        <div class="row form-group" style="margin-top: -15px;">
+                <label class="col-sm-4 panel-content-modal">Tahun Data</label>
+                <div class="col-sm-6">
+                        <md-select class="input-bordered panel-content-modal" required md-no-asterisk
+                                ng-model="inputfeature.year" ng-change="checkPeriod()">
+                                <md-option ng-value="yd.name" ng-repeat="yd in dyear">{{yd.name}}</md-option>
+                        </md-select>
+                </div>
+        </div>
+
+        <div class="row form-group" style="margin-top: -15px;">
+                <label class="col-sm-4 panel-content-modal">Periode Data</label>
+                <div class="col-sm-6">
+                        <md-select class="input-bordered panel-content-modal"
+                                ng-disabled="!inputfeature.year || !inputfeature.name" required md-no-asterisk
+                                ng-model="inputfeature.period">
+                                <md-option ng-value="pd.name" ng-repeat="pd in dperiod">{{pd.name}}</md-option>
+                        </md-select>
+                </div>
+        </div>
+
+        <div class="row form-group">
+                <input style="margin-left: 155px; margin-top: -15px;"
+                        ng-disabled="!inputfeature.name || !inputfeature.year  || !inputfeature.period" type="file"
+                        nv-file-select="" uploader="uploader" accept=".tif" />
+        </div>
+
+</div>
+
+<div class="btn-footer">
+        <button class=" btn btn-primary btn-bordered" style=" margin-left: -50px !important;"
+                ng-disabled="!inputfeature.name || !inputfeature.year  || !inputfeature.period" ng-click="addNewInput()"
+                aria-label="Add new input feature">
+                <div ng-show="uploadingInput" layout="row" layout-sm="column" layout-align="space-around">
+                        <md-progress-circular md-mode="indeterminate" md-diameter="20px"></md-progress-circular>
+                </div>
+                <span ng-show="!uploadingInput">Tambah Fitur</span>
+        </button>
+</div>

@@ -1,0 +1,153 @@
+<section layout="row" flex style="min-height: 100% !important;">
+    <md-sidenav md-is-locked-open="true" class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+        <md-list flex>
+            <md-list-item ng-click="activeMenu = 'datainput'; loadInput();" ng-class="{'activelist':activeMenu == 'datainput'}">
+                <md-icon md-svg-icon="img/icons/perm_media-black-48dp.svg" md-menu-align-target></md-icon>
+                <span class='mainmenu' flex>Data Input</span>
+            </md-list-item>
+            <md-list-item ng-click="activeMenu = 'model'; loadModel();" ng-class="{'activelist':activeMenu == 'model'}">
+                <md-icon md-svg-icon="img/icons/model_training-black-48dp.svg" md-menu-align-target></md-icon>
+                <span class='mainmenu' flex>Model Machine Learning</span>
+            </md-list-item>
+            <md-list-item ng-click="activeMenu = 'webgis'" ng-class="{'activelist':activeMenu == 'webgis'}">
+                <md-icon md-svg-icon="img/icons/web-black-48dp.svg" md-menu-align-target></md-icon>
+                <span class='mainmenu' flex>WebGIS</span>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+    <div flex layout="column">
+        <div layout="column" flex ng-show="activeMenu == 'datainput'" style="padding-top: 35px;">
+            <main flex="none" layout="row" layout-wrap>
+                <div flex="30" style="max-height: 70vh !important;overflow: auto;padding-left: 35px;">
+                    <div class="noanimate" layout="row" layout-wrap>
+                        <md-input-container style="margin-top:-10px; margin-bottom: -24px;" ng-show="showinputsearch" flex="85">
+                            <input id="searchbar" ng-change='searchInputFeature()' placeholder="Cari fitur..." md-no-asterisk ng-model="featsearch">
+                        </md-input-container>
+                        <span ng-show="!showinputsearch" flex="85">Input Features:</span>
+                        <md-icon flex="15" style="margin:0px !important;cursor: pointer;" class="md-secondary" md-svg-src="img/icons/search-black-36dp.svg" ng-click="showinpsearchbar()"></md-icon>
+                        <!-- <md-button aria-label="Search" >
+                        </md-button> -->
+                    </div>
+                    <md-list flex style="overflow-y: auto;">
+                        <md-list-item ng-repeat="item in features" ng-click="loadDetail(item)">
+                            <div layout="column" layout-wrap>
+                                <div layout="row" layout-wrap>
+                                    <span style="color: rgb(35, 65, 199);" flex>{{item.name}}</span>
+                                    <md-button ng-show="item.own=='yes'" class="md-secondary" ng-click="removeInput(item.idi, $event)">
+                                        <md-tooltip md-direction="top">HAPUS INPUT</md-tooltip>
+                                        <md-icon md-svg-src="img/icons/delete-24px.svg"></md-icon>
+                                    </md-button>
+                                    <md-icon class="md-secondary" md-svg-src="img/icons/expand_more-24px.svg" ng-show="!item.toggle"></md-icon>
+                                    <md-icon class="md-secondary" md-svg-src="img/icons/expand_less-24px.svg" ng-show="item.toggle"></md-icon>
+                                </div>
+                                <div class="featuredet" ng-show="item.toggle">
+                                    <p>Status: {{item.status}}</p>
+                                </div>
+                                <md-list flex ng-show="item.toggle">
+                                    <md-list-item style="min-height: 26px !important; font-size: 14px;" ng-repeat="item2 in item.fyear" ng-click="loadYearDetail(item, item2)">
+                                        <div layout="column" layout-wrap>
+                                            <div layout="row" layout-wrap>
+                                                <span style="color: rgb(35, 65, 199);" flex>{{item2.name}}</span>
+                                                <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!item2.toggle"></md-icon>
+                                                <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="item2.toggle"></md-icon>
+                                            </div>
+                                            <table flex ng-show="item2.toggle">
+                                                <tr ng-repeat="item3 in item2.fperiod">
+                                                    <td ng-class="item.status=='Inconsistent Projection' || x.status=='Inconsistent Geometry' ? 'warnperiod':''" ng-style="x.status=='Complete'? { color:'DeepSkyBlue'}: { color:'grey'}" style="min-width: 22px;text-align: right;" ng-repeat="x in item3">
+                                                        {{ x.name }}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <div flex="5"></div>
+                <div flex="60">
+                    Bounding Box: {{activeFeature}}
+                    <div ng-map id="map" class="map"></div>
+                </div>
+                <div flex="5"></div>
+            </main>
+            <div flex></div>
+            <footer flex="none" style="height: 152px;">
+                <md-toolbar layout-padding class="md-hue-2" md-whiteframe="4">
+                    <div layout="row" layout-align="end center" flex>
+                        <md-button flex="15" class="md-raised" ng-click="showAddNewInputDialog($event)">
+                            <md-icon md-svg-src="img/icons/add_circle-24px.svg"></md-icon>
+                            INPUT DATA
+                        </md-button>
+                    </div>
+                </md-toolbar>
+            </footer>
+        </div>
+        <div layout="column" flex ng-show="activeMenu == 'model'" style="padding-top: 35px;">
+            <div flex="none" layout="column" layout-wrap>
+                <div style="max-height: 70vh !important;overflow: auto;padding-left: 35px;max-width: 90%;">
+                    List Models:
+                    <md-list flex style="overflow: auto;">
+                        <md-list-item ng-repeat="item in models" ng-click="loadModDetail(item)">
+                            <div layout="column" layout-wrap>
+                                <div layout="row" layout-wrap>
+                                    <span ng-style="item.status=='finish'? { color: 'DodgerBlue'}: { color:'GoldenRod'}" style="font-size: larger;display: list-item;margin-left: 3px;" flex>{{item.name}}</span>
+                                    <span ng-show='item.level' style='font-style: italic;color: deepskyblue;'>&nbsp;&nbsp;&nbsp;&nbsp;({{item.level}})</span>
+                                    <md-icon class="md-secondary" md-svg-src="img/icons/expand_more-24px.svg" ng-show="!item.toggle"></md-icon>
+                                    <md-icon class="md-secondary" md-svg-src="img/icons/expand_less-24px.svg" ng-show="item.toggle"></md-icon>
+                                </div>
+                                <div class="featuredet" ng-show="item.toggle">
+                                    <p>Status: {{item.status}}</p>
+                                </div>
+                                <div flex class='logbox' ng-show="item.toggle" md-whiteframe="2" style="max-height: 300px;overflow: auto;">
+                                    <md-content><pre style='line-height:14px !important;'>{{logText}}</pre></md-content>
+                                </div>
+                                <div layout="row" layout-align="end center" layout-wrap ng-show="item.toggle">
+                                    <md-button ng-show='item.status=="prediction paused"' flex="20" ng-click="playModel(item.id)">
+                                        <md-icon md-svg-src="img/icons/play_circle_filled-24px.svg"></md-icon>
+                                        RUN PREDICTION
+                                    </md-button>
+                                    <md-button ng-show='item.status=="finish"' flex="20" ng-click="pauseModel(item.id)">
+                                        <md-icon md-svg-src="img/icons/pause_circle_filled-24px.svg"></md-icon>
+                                        PAUSE PREDICTION
+                                    </md-button>
+                                    <md-button flex="15" ng-click="editModel($event, item.id)">
+                                        <md-icon md-svg-src="img/icons/settings-24px.svg"></md-icon>
+                                        EDIT MODEL
+                                    </md-button>
+                                    <md-button ng-show='item.status=="cancelled"' flex="20" ng-click="runModel(item.id)">
+                                        <md-icon md-svg-src="img/icons/cancel-24px.svg"></md-icon>
+                                        START TRAINING
+                                    </md-button>
+                                    <md-button ng-show='item.status!="finish" && item.status!="cancelled"' flex="20" ng-click="cancelModel($event, item.id)">
+                                        <md-icon md-svg-src="img/icons/cancel-24px.svg"></md-icon>
+                                        CANCEL TRAINING
+                                    </md-button>
+                                    <md-button ng-show='item.status=="finish"' flex="15" ng-click="deleteModel($event, item.id)">
+                                        <md-icon md-svg-src="img/icons/delete-24px.svg"></md-icon>
+                                        DELETE MODEL
+                                    </md-button>
+                                </div>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </div>
+            <div flex></div>
+            <footer flex="none" style="height: 152px;">
+                <md-toolbar layout-padding class="md-hue-2" md-whiteframe="4">
+                    <div layout="row" layout-align="end center" flex>
+                        <md-button flex="15" class="md-raised" ng-click="showAddNewModelDialog($event)">
+                            <md-icon md-svg-src="img/icons/add_circle-24px.svg"></md-icon>
+                            NEW MODEL
+                        </md-button>
+                    </div>
+                </md-toolbar>
+            </footer>
+        </div>
+        <div ng-show="activeMenu == 'webgis'" style="padding-top: 0px;">
+            <iframe style="width:79vw; height:90vh;" ng-src="{{detailFrame}}"></iframe>
+        </div>
+    </div>
+</section>

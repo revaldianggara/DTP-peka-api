@@ -1,0 +1,222 @@
+.modal {
+      text-align: center;
+      padding: 0 !important;
+}
+
+.modal:before {
+      content: '';
+      margin-left: 15%;
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+      margin-right: -4px;
+}
+
+.modal-dialog {
+      display: inline-block;
+      text-align: left;
+      vertical-align: middle;
+}
+
+.modal-content .datainput {
+      width: 400px !important;
+      min-width: fit-content !important;
+      border-radius: 10px 10px 0px 0px;
+
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+
+
+      color: #3A3B3F;
+
+}
+
+.close-modal {
+      text-align: end;
+}
+
+.head {
+      margin-top: -18px;
+}
+
+.head-modal-bordered {
+      border-radius: 10px 10px 0px 0px;
+      height: 115px !important;
+}
+
+.btn-bordered {
+      background: linear-gradient(138.88deg, #35676C 3.23%, #0e5257 95.79%);
+      border-radius: 10px;
+      height: 40px;
+}
+
+.btn-bordered:hover {
+      background: linear-gradient(138.88deg, #35676C 3.23%, #00191B 95.79%);
+
+}
+
+.input-bordered {
+      border: 1px solid #C4C4C4;
+      box-sizing: border-box;
+      border-radius: 10px;
+      width: 100%;
+      min-width: 150px;
+      margin-top: -10px !important;
+      height: 50px;
+      padding-left: 15px;
+}
+
+.input-bordered-chip {
+      border: 1px solid #C4C4C4 !important;
+      border-radius: 10px;
+      margin-top: -10px;
+      /* margin-left: 15px; */
+      /* height: 40px; */
+      max-width: 230px !important;
+
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      /* line-height: 20px; */
+      background-color: white;
+
+
+      color: #3A3B3F;
+      width: 230px !important;
+}
+
+.input-bordered-chipml {
+      border: 1px solid #C4C4C4 !important;
+      border-radius: 10px;
+      margin-top: -10px;
+      /* margin-left: 15px; */
+      /* height: 40px; */
+      max-width: 200px !important;
+
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      /* line-height: 20px; */
+      background-color: white;
+
+
+      color: #3A3B3F;
+      height: 50px;
+      padding-bottom: 50px !important;
+      width: 200px !important;
+}
+
+@media (max-width: 768px) {
+
+      .modal-header {
+            min-height: 100px;
+      }
+
+      .modal-dialog {
+            margin-top: 200px;
+            overflow: hidden !important;
+      }
+
+      .modal {
+            text-align: center;
+            padding: 50% !important;
+      }
+
+      .modal:before {
+            content: '';
+      }
+
+      .modal-dialog {
+            text-align: left;
+            left: -121px;
+            top: -290px;
+      }
+
+      .modal-content .datainput {
+            width: fit-content !important;
+            border-radius: 10px 10px 0px 0px;
+
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 20px;
+
+
+            color: #3A3B3F;
+      }
+
+      .close-modal {
+            text-align: end;
+            margin-top: -5px;
+      }
+
+      .head {
+            margin-top: -20px;
+            font-size: 20px;
+            margin-top: 5px;
+      }
+}
+
+.content-modal {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+
+
+      color: #444444;
+}
+
+.md-button.md-primary {
+      background: #468288;
+      border-radius: 10px;
+      text-transform: none;
+}
+
+.md-button.md-primary {
+      background: #468288;
+      border-radius: 10px;
+      text-transform: none;
+}
+
+.md-button.md-primary:hover {
+      color: #3A3B3F;
+}
+
+.btn-footer {
+      border: none !important;
+      margin-left: 300px;
+      margin-bottom: 25px;
+      margin-top: -10px;
+}
+
+.logtext {
+      line-height: 14px !important;
+      background-color: white;
+      font-family: Courier;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 14px;
+
+      color: #444444;
+}
+
+.list-model {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+      /* identical to box height */
+
+
+      color: #444444;
+}

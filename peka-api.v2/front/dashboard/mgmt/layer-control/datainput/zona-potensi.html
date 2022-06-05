@@ -1,0 +1,116 @@
+<div class="page page-table" ng-controller="dataInputZpCtrl">
+        <div class="row">
+                <div class="col-md-5">
+                        <h3 style="margin-top: 5px">LIST FITUR</h3>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-lg-5 col-md-5"></div>
+                <div class="col-lg-7 col-md-5">
+                        <p>Kabupaten: <strong>{{kabupatenSelected}}</strong></p>
+                        <p>Active Feature: <strong>{{activeFeature}}</strong></p>
+                </div>
+        </div>
+
+        <div class="row" style="margin-top: 10px;">
+                <div class=" col-md-5">
+                        <div class="panel-heading panel-heading-fitur">
+                                <div class="flex-between">
+                                        <div class="col-md-5" style="margin-left: -15px">
+                                                <div class="noanimate">
+                                                        <input type="text" class="input-bordered-40 form-control"
+                                                                placeholder="Cari Kabupaten"
+                                                                uib-typeahead="loc.nama for loc in kabupaten | filter:$viewValue | limitTo:8"
+                                                                typeahead-on-select="setKab($item)"
+                                                                ng-model="kabupatenSelected">
+                                                </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                                <input placeholder="&#xF002; Pilih Fitur"
+                                                        style="font-family: poppins, FontAwesome"
+                                                        class="input-bordered-40" id="searchbar"
+                                                        ng-change="searchInputFeature()" md-no-asterisk
+                                                        ng-model="featsearch" ng-disabled="!kabupatenSelected" />
+                                        </div>
+                                        <div class="col-md-2">
+                                                <button ng-show="download" class="btn-download"
+                                                        ng-click="downloadTemplate()">
+                                                        <md-tooltip md-direction="top">Download template </md-tooltip>
+                                                        <img src="assets/images/custom_icons/download.svg"
+                                                                style="padding: 5px" />
+                                                </button>
+                                                <div ng-show="loadingDownload" layout="row" layout-sm="column"
+                                                        layout-align="space-around">
+                                                        <md-progress-circular md-mode="indeterminate"
+                                                                md-diameter="20px"> </md-progress-circular>
+                                                </div>
+
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="panel panel-default txt-poppins-14 panel-fitur-bordered panel-fitur-content">
+                                <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                                <tbody>
+                                                        <tr ng-class="{'select-feature' : item.name == activeFeature}"
+                                                                ng-repeat="item in features"
+                                                                ng-click="loadDetail(item, item2, false)"
+                                                                style="margin: 5px">
+                                                                <td>
+                                                                        <div layout="row">
+                                                                                <span ng-style="{ 'color' : (item.name == activeFeature) ? 'white' : '#444444;' }"
+                                                                                        style="padding-left: 10px"
+                                                                                        flex>{{item.name}} </span>
+                                                                                <md-icon ng-show="item.stat!='default'"
+                                                                                        class="md-secondary"
+                                                                                        md-svg-src="assets/images/custom_icons/delete-black.svg"
+                                                                                        ng-click="deleteFeature($event, item, item2)">
+                                                                                        <md-tooltip md-direction="top">
+                                                                                                HAPUS INPUT</md-tooltip>
+                                                                                </md-icon>
+                                                                        </div>
+                                                                </td>
+                                                        </tr>
+                                                </tbody>
+                                        </table>
+                                </div>
+                        </div>
+                </div>
+                <div class="col-md-7">
+                        <md-toolbar md-whiteframe="2" class="subheader-bordered">
+                                <div class="md-toolbar-tools">
+                                        <span flex="20" class="subheader-content"><strong>PERIODE</strong></span>
+                                        <span flex="30" class="subheader-content"><strong>START DATE</strong></span>
+                                        <span flex="25" class="subheader-content"><strong>STOP DATE</strong></span>
+                                        <span flex="25" class="subheader-content"><strong>NILAI</strong></span>
+                                        <span></span>
+                                </div>
+                        </md-toolbar>
+
+                        <md-content class="panel-data-bordered" style="max-height: 400px; z-index: 50" md-whiteframe="1"
+                                ng-scroll-end="bottomData()">
+                                <div layout="column">
+                                        <md-list flex style="overflow-y: auto; font-size: 14px">
+                                                <md-list-item ng-repeat="pd in dataft">
+                                                        <div layout="row" layout-wrap flex>
+                                                                <span flex="20"
+                                                                        style="text-align: center">{{ pd.period }}</span>
+                                                                <span flex="30"
+                                                                        style="text-align: center">{{ pd.startdate }}</span>
+                                                                <span flex="25"
+                                                                        style="text-align: center">{{ pd.stopdate }}</span>
+                                                                <span flex="25"
+                                                                        style="text-align: center">{{ pd.value }}</span>
+                                                        </div>
+                                                </md-list-item>
+                                        </md-list>
+                                        <div ng-show="loadingLog" layout="row" layout-sm="column"
+                                                layout-align="space-around">
+                                                <md-progress-circular md-mode="indeterminate" md-diameter="20px">
+                                                </md-progress-circular>
+                                        </div>
+                                </div>
+                        </md-content>
+                </div>
+        </div>
+</div>

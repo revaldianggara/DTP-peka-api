@@ -1,0 +1,132 @@
+<div class="page page-table" ng-controller="monitoringCtrl">
+  <div class="btn-flex" style="margin-right: 20px;">
+    <button class="btn-monitoring" ng-class="{'selected-btn': category === 'predhotspot'}"
+      ng-click="showPd('perolehandata')">
+      <img class="img-pd" src="assets/images/custom_icons/perolehan-data.svg">
+      <span>PEROLEHAN DATA</span>
+    </button>
+    <button class="btn-monitoring" ng-class="{'selected-btn': category === 'processing'}"
+      ng-click="showPr('processing')">
+      <img class="img-processing" src="assets/images/custom_icons/processing.svg">
+      <span>PROCESSING</span>
+    </button>
+    <button class="btn-monitoring" ng-class="{'selected-btn': category === 'input'}" ng-click="showInput('input')">
+      <img class="img-input" src="assets/images/custom_icons/input.svg">
+      <span>INPUT</span>
+    </button>
+    <button class="btn-monitoring" ng-class="{'selected-btn': category === 'predhotspot'}"
+      ng-click="showPh('predhotspot')">
+      <img class="img-prediksi" src="assets/images/custom_icons/prediksi.svg">
+      <span>PREDIKSI MODEL HOTSPOT</span>
+    </button>
+    <button class="btn-monitoring" ng-class="{'selected-btn': category === 'predveg'}" ng-click="showPv('predveg')">
+      <img class="img-prediksi" src="assets/images/custom_icons/prediksi.svg">
+      <span>PREDIKSI DEVEGETASI</span>
+    </button>
+  </div>
+
+  <div class="row" style="padding-top: 35px; margin-left: 20px; margin-right: 20px;">
+    <md-toolbar md-whiteframe="2" class="subheader-bordered">
+      <div class="md-toolbar-tools subheader-content">
+        <span flex="50" style="padding-left: 5%;">Nama File</span>
+        <span flex="35">Status</span>
+        <span>Tanggal</span>
+      </div>
+    </md-toolbar>
+
+    <md-content md-whiteframe="1" class="bordered-table"
+      style="height: 45vh; max-height: 45vh; z-index: 50; overflow-x: hidden;">
+      <div class="row panel-data">
+        <section class="panel panel-default table-dynamic " ng-show="visiblePd">
+          <div class="table-responsive">
+            <table class="table table-hover data-user">
+              <tbody>
+                <tr ng-repeat="pd in dataPd">
+                  <td style="width: 30%; padding-left: 5%;">{{ pd.nama }}</td>
+                  <td style="width: 20%;">{{ pd.status }}</td>
+                  <td style="width: 10%;">{{ pd.time }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div ng-show="loadingLog" layout="row" layout-sm="column" layout-align="space-around">
+            <md-progress-circular md-mode="indeterminate" md-diameter="20px">
+            </md-progress-circular>
+          </div>
+        </section>
+
+        <section class="panel panel-default table-dynamic bordered-table" ng-show="visiblePr">
+          <div class="table-responsive">
+            <table class="table table-hover data-user">
+              <tbody>
+                <tr ng-repeat="pr in dataPr">
+                  <td style="width: 30%; padding-left: 5%;">{{ pr.nama }}</td>
+                  <td style="width: 20%;">{{ pr.status }}</td>
+                  <td style="width: 10%;">{{ pr.time }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div ng-show="loadingLog" layout="row" layout-sm="column" layout-align="space-around">
+            <md-progress-circular md-mode="indeterminate" md-diameter="20px">
+            </md-progress-circular>
+          </div>
+        </section>
+
+        <section class="panel panel-default table-dynamic bordered-table" ng-show="visibleInput">
+          <div class="table-responsive">
+            <table class="table table-hover data-user">
+              <tbody>
+                <tr ng-repeat="inp in dataInput">
+                  <td style="width: 30%; padding-left: 5%;">{{ inp.nama }}</td>
+                  <td style="width: 20%;">{{ inp.status }}</td>
+                  <td style="width: 10%;">{{ inp.time }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div ng-show="loadingLog" layout="row" layout-sm="column" layout-align="space-around">
+            <md-progress-circular md-mode="indeterminate" md-diameter="20px">
+            </md-progress-circular>
+          </div>
+        </section>
+
+        <section class="panel panel-default table-dynamic bordered-table" ng-show="visiblePh">
+          <div class="table-responsive">
+            <table class="table table-hover data-user">
+              <tbody>
+                <tr ng-repeat="ph in dataPh">
+                  <td style="width: 30%; padding-left: 5%;">{{ ph.nama }}</td>
+                  <td style="width: 20%;">{{ ph.status }}</td>
+                  <td style="width: 10%;">{{ ph.time }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div ng-show="loadingLog" layout="row" layout-sm="column" layout-align="space-around">
+            <md-progress-circular md-mode="indeterminate" md-diameter="20px">
+            </md-progress-circular>
+          </div>
+        </section>
+
+        <section class="panel panel-default table-dynamic bordered-table" ng-show="visiblePv">
+          <div class="table-responsive">
+            <table class="table table-hover data-user">
+              <tbody>
+                <tr ng-repeat="pv in dataPh">
+                  <td style="width: 30%; padding-left: 5%;">{{ pv.nama }}</td>
+                  <td style="width: 20%;">{{ pv.status }}</td>
+                  <td style="width: 10%;">{{ pv.time }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div ng-show="loadingLog" layout="row" layout-sm="column" layout-align="space-around">
+            <md-progress-circular md-mode="indeterminate" md-diameter="20px">
+            </md-progress-circular>
+          </div>
+        </section>
+      </div>
+    </md-content>
+  </div>
+</div>

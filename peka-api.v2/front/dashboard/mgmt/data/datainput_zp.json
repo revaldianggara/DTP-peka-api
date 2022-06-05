@@ -1,0 +1,116 @@
+{
+
+      "features": [{
+            "name": "TINGGI MUKA AIR1"
+      }, {
+            "name": "MODIS-SWIR RAW1"
+      }, {
+            "name": "TINGGI MUKA AIR2"
+      }, {
+            "name": "MODIS-SWIR RAW2"
+      }, {
+            "name": "TINGGI MUKA AIR3"
+      }, {
+            "name": "MODIS-SWIR RAW3"
+      }, {
+            "name": "TINGGI MUKA AIR4"
+      }, {
+            "name": "MODIS-SWIR RAW4"
+      }, {
+            "name": "TINGGI MUKA AIR5"
+      }, {
+            "name": "TINGGI MUKA RAW5"
+      }],
+
+      "detail": [{
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }, {
+            "kabupaten": "Bengkalis",
+            "koordinat": "127.5319 - 8.6319",
+            "wktufc": "2021-02-23 23:04:24",
+            "nilai": 3.411
+      }]
+}

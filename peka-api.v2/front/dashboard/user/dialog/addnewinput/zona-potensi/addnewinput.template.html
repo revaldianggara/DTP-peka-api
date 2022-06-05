@@ -1,0 +1,97 @@
+<md-dialog aria-label="addnewinputdialogZP" style="min-width: 300px">
+  <md-dialog-content style="overflow: hidden">
+    <div class="modal-header text-center head-modal-bordered theme" style="height: 81px !important">
+      <div class="close-modal">
+        <md-button class="md-icon-button" ng-click="cancelAddInputFeature()">
+          <md-icon md-svg-src="assets/images/custom_icons/exit.svg" aria-label="Close dialog"> </md-icon>
+        </md-button>
+      </div>
+      <h3 class="head">Input Fitur Baru</h3>
+    </div>
+    <br />
+  </md-dialog-content>
+
+  <md-dialog-content>
+    <div class="modal-body panel-content-modal" style="margin-left: 30px">
+      <div class="row form-group">
+        <label class="col-sm-4 content-modal">Pilih Fitur</label>
+        <div class="col-sm-4" style="min-width: 200px !important; margin-left: -15px !important">
+          <md-select class="input-bordered panel-content-modal" required md-no-asterisk ng-model="inputfeature.name"
+            md-on-open="loadFeature()">
+            <md-option ng-value="inpf.name" ng-repeat="inpf in inpFeature">{{inpf.name}}</md-option>
+          </md-select>
+        </div>
+        <div class="col-sm-2" style="padding-top: 3px">
+          <md-tooltip md-direction="top">TAMBAH FITUR </md-tooltip>
+          <md-icon md-svg-src="assets/images/custom_icons/add-circle.svg" aria-label="Close dialog"
+            ng-click="addNewInputFeatureName($event)"> </md-icon>
+        </div>
+      </div>
+
+      <div class="row form-group" style="margin-top: -15px">
+        <label class="col-sm-4 content-modal">Tahun</label>
+        <div class="col-sm-6" style="min-width: 250px !important; margin-left: -15px !important">
+          <md-select class="input-bordered panel-content-modal" required md-no-asterisk ng-model="inputfeature.year"
+            ng-disabled="!inputfeature.name" ng-change="checkPeriod()">
+            <md-option ng-value="yd.name" ng-repeat="yd in dyear">{{yd.name}}</md-option>
+          </md-select>
+        </div>
+      </div>
+
+      <div class="row form-group" style="margin-top: -15px">
+        <label class="col-sm-4 content-modal">Periode Data</label>
+        <div class="col-sm-6" style="min-width: 250px !important; margin-left: -15px !important">
+          <md-select class="input-bordered panel-content-modal" ng-disabled="!inputfeature.year || !inputfeature.name"
+            required md-no-asterisk ng-model="inputfeature.period">
+            <md-option ng-value="pd.name" ng-repeat="pd in dperiod">{{pd.name}}</md-option>
+          </md-select>
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="col-sm-4 content-modal">Kabupaten</label>
+        <div class="col-sm-3" style="max-width: 220px !important">
+          <!-- <md-chips class="content-modal" ng-change="inputChange()" ng-model="inputfeature.Kabupaten"
+            md-autocomplete-snap md-transform-chip="transformChip($chip)" md-require-match="true"
+            input-aria-label="Input Features">
+            <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText"
+              md-items="item in queryFeaturesSearch(searchText)" md-item-text="item.name"
+              input-aria-describedby="autocompleteTitle">
+              <span md-highlight-text="searchText">{{item.name}}</span>
+            </md-autocomplete>
+            <md-chip-template>
+              <span style="font-size: small"> {{$chip.name}} </span>
+            </md-chip-template>
+          </md-chips> -->
+          <input type="text" class="input-bordered-40 input-bordered-typehead form-control"
+            uib-typeahead="loc.nama for loc in kabupaten | filter:$viewValue | limitTo:8"
+            typeahead-on-select="setKab($item)" ng-model="kabupatenSelected"
+            ng-disabled="!inputfeature.year || !inputfeature.name || !inputfeature.period" required>
+        </div>
+      </div>
+      <br /><br />
+
+      <div class="row">
+        <label class="col-sm-4 content-modal">Nilai</label>
+        <div class="col-sm-3" style="margin-left: -15px; min-width: 250px">
+          <input type="number" class="form-control input-bordered" md-no-asterisk required
+            ng-model="inputfeature.value" />
+        </div>
+      </div>
+    </div>
+    <br />
+  </md-dialog-content>
+
+  <md-dialog-content>
+    <div class="btn-footer">
+      <button class="btn btn-primary btn-bordered md-raised" ng-click="addNewModel()"
+        ng-disabled="!inputfeature.kabupaten || !inputfeature.value" aria-label="Add new input feature"
+        style="margin-right: 80px; width: 130px">
+        <div ng-show="uploadingInput" layout="row" layout-sm="column" layout-align="space-around">
+          <md-progress-circular md-mode="indeterminate" md-diameter="20px"></md-progress-circular>
+        </div>
+        <span>SIMPAN</span>
+      </button>
+    </div>
+  </md-dialog-content>
+</md-dialog>

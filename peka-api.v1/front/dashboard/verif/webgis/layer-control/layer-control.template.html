@@ -1,0 +1,122 @@
+<section>
+    <md-sidenav class="md-sidenav-left flipped" md-component-id="left" md-disable-backdrop md-whiteframe="4" layout="row">
+        <md-list class="unflipped" flex>
+            <md-list-item ng-click="toggle.list6 = !toggle.list6">
+                <md-icon class='menuicon' md-svg-src="img/icons/error-24px.svg"></md-icon>
+                <span style="color: rgb(248, 252, 54);" flex><strong>Penanganan</strong></span>
+                <md-icon style="z-index: 1000;" class='menuicon' md-svg-src="img/icons/add-24px.svg" ng-click="addAction();"></md-icon>
+                <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!toggle.list6"></md-icon>
+                <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="toggle.list6"></md-icon>
+            </md-list-item>
+            <div ng-slide-down="toggle.list6" duration="0.3">
+                <md-list class="main-repeater2" flex  ng-scroll-end="bottomRec()">
+                    <md-list-item class="md-dense itemlist" ng-repeat="item in recDateGroup">
+                        <span flex-offset="5" ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'white'}">{{item.psd}}</span>
+                        <md-checkbox class="md-secondary" ng-model="item.check" ng-change="actionItemCheck(item.id)"></md-checkbox>
+                    </md-list-item>
+                </md-list>
+            </div>
+            <md-list-item ng-click="toggle.list1 = !toggle.list1">
+                <md-icon class='menuicon' md-svg-src="img/icons/noun_Machine Learning_1428746.svg"></md-icon>
+                <span style="color: mediumpurple;" flex><strong>Prediksi</strong></span>
+                <md-icon style="z-index: 1000;" class='menuicon' md-svg-src="img/icons/settings-24px.svg" ng-click="chooseModel($event);"></md-icon>
+                <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!toggle.list1"></md-icon>
+                <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="toggle.list1"></md-icon>
+            </md-list-item>
+            <div ng-slide-down="toggle.list1" duration="0.3">
+                <md-list class="main-repeater" flex  ng-scroll-end="bottomPred()">
+                    <md-list-item class="md-dense itemlist" ng-repeat="item in predDateGroup">
+                        <span flex-offset="5" ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'white'}">{{item.psd}} - {{item.ped}}</span>
+                        <md-checkbox class="md-secondary" ng-model="item.check" ng-change="predItemCheck(item.tid)"></md-checkbox>
+                    </md-list-item>
+                </md-list>
+            </div>
+            <md-list-item ng-click="toggle.list2 = !toggle.list2">
+                <md-icon class='menuicon' md-svg-src="img/icons/local_fire_department-24px.svg"></md-icon>
+                <span style="color: lightcoral;" flex><strong>Hotspot Satelit</strong></span>
+                <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!toggle.list2"></md-icon>
+                <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="toggle.list2"></md-icon>
+            </md-list-item>
+            <div ng-slide-down="toggle.list2" lazy-render duration="0.3">
+                <md-list class="main-repeater2" flex ng-scroll-end="bottomHS()">
+                    <md-list-item class="md-dense itemlist" ng-repeat="item in hsDateGroup">
+                        <span flex-offset="5" ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'white'}">{{item.psd}} - {{item.ped}}</span>
+                        <md-checkbox class="md-secondary" ng-model="item.check" ng-change="hsItemCheck(item.tid)"></md-checkbox>
+                    </md-list-item>
+                </md-list>
+            </div>
+            <md-list-item ng-click="toggle.list3 = !toggle.list3">
+                <md-icon class='menuicon' md-svg-src="img/icons/noun_forest_2421079.svg"></md-icon>
+                <span style="color: burlywood;" flex><strong>Devegetasi</strong></span>
+                <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!toggle.list3"></md-icon>
+                <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="toggle.list3"></md-icon>
+            </md-list-item>
+            <div ng-slide-down="toggle.list3" lazy-render duration="0.3">
+                <md-list class="main-repeater2" flex  ng-scroll-end="bottomVeg()">
+                    <md-list-item class="md-dense itemlist" ng-repeat="item in vegDateGroup">
+                        <span flex-offset="5" ng-style="dateCompare(item.nve)? { color:'DeepSkyBlue'}: { color:'white'}">{{item.psd}} - {{item.ped}}</span>
+                        <md-checkbox class="md-secondary" ng-model="item.check" ng-change="vegItemCheck(item.tid)"></md-checkbox>
+                    </md-list-item>
+                </md-list>
+            </div>
+            <md-list-item ng-click="toggle.list4 = !toggle.list4">
+                <md-icon class='menuicon' md-svg-src="img/icons/satellite-white-36dp.svg"></md-icon>
+                <span style="color: aquamarine;" flex><strong>Modis RGB </strong></span>
+                <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!toggle.list4"></md-icon>
+                <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="toggle.list4"></md-icon>
+            </md-list-item>
+            <div ng-slide-down="toggle.list4" lazy-render duration="0.3">
+                <md-list class="main-repeater2" flex ng-scroll-end="bottomModis()">
+                    <md-list-item class="md-dense itemlist" ng-repeat="item in modisDateGroup">
+                        <span flex-offset="5">{{item.name}}</span>
+                        <md-checkbox class="md-secondary" ng-model="item.check" ng-change="modisItemCheck(item.ur, item.name)"></md-checkbox>
+                    </md-list-item>
+                </md-list>
+            </div>
+            <md-list-item ng-click="toggle.list5 = !toggle.list5">
+                <md-icon class='menuicon' md-svg-src="img/icons/satellite-white-36dp.svg"></md-icon>
+                <span style="color: dodgerblue;" flex><strong>Landsat RGB </strong></span>
+                <md-icon md-svg-src="img/icons/expand_more-24px.svg" ng-show="!toggle.list5"></md-icon>
+                <md-icon md-svg-src="img/icons/expand_less-24px.svg" ng-show="toggle.list5"></md-icon>
+            </md-list-item>
+            <div ng-slide-down="toggle.list5" lazy-render duration="0.3">
+                <md-list class="main-repeater2" flex ng-scroll-end="bottomLandsat()">
+                    <md-list-item class="md-dense itemlist" ng-repeat="item in landsatDateGroup">
+                        <span flex-offset="5">{{item.name}}</span>
+                        <md-checkbox class="md-secondary" ng-model="item.check" ng-change="landsatItemCheck(item.ur, item.name)"></md-checkbox>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </md-list>
+    </md-sidenav>
+    <md-sidenav class="md-sidenav-right" md-component-id="right" md-disable-backdrop md-whiteframe="12" md-colors="{background: 'grey-A100'}"  md-theme="{{hs.typeid}}">
+        <md-toolbar class="md-toolbar-tools">
+            <span class="md-headline">{{hs.type}}</span>
+        </md-toolbar>
+        <div class="hotspot-info">
+            <p>Koordinat : <b>{{hs.coord}}</b></p>
+            <p ng-show="hs.typeid === 'Veg'">Tanggal Devegetasi: </p>
+            <p ng-show="hs.typeid === 'predHS'">Prediksi Waktu Kejadian: </p>
+            <p ng-show="hs.typeid === 'HS'">Tanggal Hotspot: </p>
+            <p ng-show="hs.typeid !== 'rec'"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{hs.datestr}} s/d {{hs.datestp}}</b></p>
+            <p ng-show="hs.typeid !== 'rec'">Probabilitas : <b>{{hs.conf}}</b></p>
+            <p ng-show="hs.typeid === 'rec'">Waktu: {{hs.datestr}}</p>
+            <p ng-show="hs.typeid === 'rec'">Keterangan: </p>
+            <p ng-show="hs.typeid === 'rec'"><b>{{hs.info}}</b></p>
+            <p ng-show="hs.typeid === 'rec'">Penanganan: </p>
+            <p ng-show="hs.typeid === 'rec'"><b>{{hs.act}}</b></p>
+        </div>
+    </md-sidenav>
+    <!-- <md-card style="position: absolute;top: 10px;left: 240px;z-index: 1000;">
+        <md-card-content style="padding: 0px !important;font-size: smaller;">
+            <md-slider-container style="margin-left: 10px;">
+                <span style="height: 19px;">TH</span>
+                <md-slider min="1" max="100" ng-model="predTH" aria-label="red" id="threshold-slider" class="md-warn">
+                </md-slider>
+                <md-input-container style="margin-top: 0px !important;margin-bottom: 0px !important;margin-right: 10px;">
+                    <input style="height: 28px;margin-top: -5px;" type="number" ng-model="predTH" aria-label="threshold" aria-controls="threshold-slider">
+                </md-input-container>
+            </md-slider-container>
+        </md-card-content>
+    </md-card> -->
+</section>

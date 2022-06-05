@@ -1,0 +1,295 @@
+<div class="navigasi-left">
+  <span ng-click="toggle.list1 = !toggle.list1; hideAll()" style="cursor: pointer">
+    <md-tooltip md-direction="right">Default</md-tooltip>
+    <img class="icon-nav" src="../img/custom_icons/default.svg" ng-show="toggle.list1" />
+    <img class="icon-nav" src="../img/custom_icons/default-active.svg" ng-show="!toggle.list1" />
+  </span>
+  <hr />
+
+  <span ng-click="toggle.list2 = !toggle.list2; showModeVC()" style="cursor: pointer">
+    <md-tooltip md-direction="right">Visualisasi Citra</md-tooltip>
+    <img class="icon-nav" src="../img/custom_icons/visualisasi-peta.svg" ng-show="!toggle.list2" />
+    <img class="icon-nav" src="../img/custom_icons/visualisasi-peta-active.svg" ng-show="toggle.list2" />
+  </span>
+  <hr />
+
+  <span ng-click="toggle.list3 = !toggle.list3; showModeData()" style="cursor: pointer">
+    <md-tooltip md-direction="right">Visualisasi Titik Data</md-tooltip>
+    <img class="icon-nav" src="../img/custom_icons/visualisasi-data.svg" ng-show="!toggle.list3" />
+    <img class="icon-nav" src="../img/custom_icons/visualisasi-data-active.svg" ng-show="toggle.list3" />
+  </span>
+</div>
+<!-- End panel left -->
+
+<div class="grafik">
+  <md-tooltip md-direction="left">Statistik peka-api</md-tooltip>
+  <span ng-click="toggle.list5 = !toggle.list5; showGrafik()" style="cursor: pointer">
+    <img src="../img/custom_icons/icon-chart.svg" ng-show="!toggle.list5" />
+    <img src="../img/custom_icons/icon-chart-active.svg" ng-show="toggle.list5" />
+  </span>
+</div>
+
+<div class="navigasi-warning">
+  <a href="#">
+    <img src="../img/custom_icons/level-bahaya.svg" alt="level bahaya" ng-click="showInfoBahaya()" />
+  </a>
+</div>
+
+<!-- Mode Peta -->
+<div class="panel-mode-peta" ng-show="visibleModeVC">
+  <div class="row">
+    <a href="#"><img class="close" src="../img/custom_icons/close-panel.svg" ng-click="hideModePeta()" /></a>
+    <div class="panel-content txt-poppins-14">
+      <label for="modisRGB">Citra Resolusi Menengah</label>
+      <input class="ml-10 checkbox-round" type="checkbox" name="mode-peta" value="modisRGB" id="modisRGB"
+        ng-model="item.check" ng-change="modisItemCheck(item.ur, item.name)" ng-repeat="item in modisDateGroup" />
+      <br />
+      <label for="landsatRGB">Citra Resolusi Tinggi</label>
+      <input class="ml-43" type="checkbox" id="landsatRGB" ng-model="item.check"
+        ng-change="landsatItemCheck(item.ur, item.name)" ng-repeat="item in landsatDateGroup" />
+    </div>
+  </div>
+</div>
+<!-- </div> -->
+
+<!-- Statisktik -->
+<div class="statistik-panel" layout="row" md-theme-watch="true" ng-show="visibleGrafik">
+  <div flex>
+    <div class="divider divider-md"></div>
+    <div class="logo-peka-api">
+      <img src="img/custom_icons/statistik-peka-api.svg" />
+    </div>
+  </div>
+
+  <div class="periode">
+    <button class="btn-chart txt-poppins-12" ng-click="showChartPeriode('periode')"
+      ng-class="{'chart-selected': category === 'periode'}">Periode</button>
+    <button class="btn-chart txt-poppins-12" ng-click="showChartZonaPotensi('zonapotensi')"
+      ng-class="{'chart-selected': category === 'zonapotensi'}">Zona Potensi</button>
+  </div>
+  <div class="tahun">
+    <span>
+      <input class="txt-poppins-14" type="text" uib-datepicker-popup="{{format}}" ng-model="today2"
+        is-open="popup.opened" datepicker-options="dateOptions" min-date="minDate" max-date="today" ng-required="true"
+        close-text="Close" ng-change="selectPHSOnYear(today2); selectVegOnYear(today2); selectHSOnYear(today2)" />
+      <img src="img/custom_icons/calendar.svg" ng-click="open($event)" style="cursor: pointer" />
+    </span>
+  </div>
+
+  <!-- Periode -->
+  <div flex="80" class="canvas-chartjs" ng-show="visibleChartPeriode">
+    <canvas id="chartjs" class="chart-base" chart-type="line" chart-data="[statsPHS,
+    statsHS,
+    statsVeg]" chart-labels="labels_periode" chart-series="series_periode" chart-options="optionsPeriode"
+      chart-dataset-override="dataOverridePeriode" chart-click="onClick" chart-click="onClick">
+    </canvas>
+    <div class="row label-xaxis">
+      <img class="ellips" src="img/custom_icons/ellips-chart.svg" alt="ellips" />
+      <label class="label-chart txt-poppins-12">Periode</label>
+    </div>
+  </div>
+
+  <!-- Zona Potensi -->
+  <div flex="80" class="row" ng-show="visibleChartPrediksi">
+    <chart style="width: 100%; height: 380px"></chart>
+    <div class="row label-xaxis">
+      <img class="ellips" src="img/custom_icons/ellips-chart.svg" alt="ellips" />
+      <label class="label-chart txt-poppins-12">Periode</label>
+    </div>
+  </div>
+  <!-- label y axis -->
+  <div class="label-yaxis">
+    <img class="ellips" src="img/custom_icons/ellips-chart.svg" alt="ellips" />
+    <label class="label-chart txt-poppins-12" style="margin-top: 55%">Jumlah Titik</label>
+  </div>
+  <div flex></div>
+</div>
+<!-- End grafik statistik -->
+
+<!-- Fitur Data -->
+<div class="panel-fitur-data" ng-show="visibleModeData">
+  <div class="row">
+    <a href="#"><img class="close" src="../img/custom_icons/close-panel.svg" ng-click="hideModeData()" /></a>
+    <div class="panel-content">
+      <ul style="margin-left: -40px">
+        <label for="prediksi">
+          Potensi Hotspot
+          <input type="checkbox" id="prediksi" ng-repeat="item in predDateGroup" ng-model="item.check"
+            ng-init="item.check = true" ng-change="predItemCheck(item.tid)" style="margin-left: 40px" />
+        </label>
+        <label for="hotspotsatelit">
+          Hotspot Satelit
+          <input type="checkbox" id="prediksi" ng-repeat="item in hsDateGroup" ng-model="item.check"
+            ng-change="hsItemCheck(item.tid)" style="margin-left: 48px" />
+        </label>
+        <label for="zonapotensi">
+          Zona Potensi
+          <input type="checkbox" id="zonapotensi" style="margin-left: 60px" />
+        </label>
+        <label for="devegetasi">
+          Devegetasi
+          <input type="checkbox" id="devegetasi" ng-repeat="item in vegDateGroup" ng-model="item.check"
+            ng-change="vegItemCheck(item.tid)" style="margin-left: 76px" />
+        </label>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Tingkatan bahaya -->
+<div class="panel-tingkat-bahaya" ng-show="visibleInfoBahaya">
+  <a href="#infobahaya"><img class="close" src="../img/custom_icons/close-panel.svg" alt="close-panel"
+      ng-click="hideInfoBahaya()" /></a>
+  <div class="row">
+    <h3 class="txt-poppins-16">Zona Potensi</h3>
+    <span class="desc-bahaya txt-poppins-12 text-center">Label tingkatan zona potensi <br />berdasarkan warna</span>
+    <img class="bar-bahaya" src="../img/custom_icons/bar-tingkat-bahaya.svg" alt="tingkat bahaya" />
+  </div>
+  <div class="row info-bahaya">
+    <div class="inline">
+      <img src="../img/custom_icons/dot-yellow.svg" />
+      <img src="../img/custom_icons/dot-orange.svg" />
+      <img src="../img/custom_icons/dot-orange2.svg" />
+      <img src="../img/custom_icons/dot-red.svg" />
+    </div>
+    <br />
+    <div class="inline txt-poppins-9">
+      <label>Rendah</label>
+      <label>Sedang</label>
+      <label>Tinggi</label>
+      <label>Sangat Tinggi</label>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="row footer">
+  <button class="btn btn-footer footer-up" ng-show="visibleFooterUp" ng-click="showFooterData()">
+    Data Statistik
+    <img src="img/custom_icons/angle-double-up-10x10.svg" style="margin-left: 20px" />
+  </button>
+  <p align="left" style="white-space: nowrap">
+    <marquee class="peka-footer txt-poppins-14" direction="left">Penanganan kebencanaan menggunakan kecerdasan
+      artificial</marquee>
+  </p>
+  <label class="credit-bppt txt-poppins-12">© {{thisyear}} Badan Pengkajian Dan Penerapan Teknologi</label>
+</div>
+<!-- End Footer -->
+
+<!-- Footer data -->
+<div class="row footer-data" ng-show="visibleFooterData">
+  <button class="btn btn-footer footer-down" ng-click="hideFooterData()">
+    Data Statistik
+    <img src="img/custom_icons/angle-double-down-10x10.svg" style="margin-left: 20px" />
+  </button>
+
+  <div class="col-md-6">
+    <img class="bg-bppt" src="img/custom_icons/logo-bppt.svg" alt="bppt" />
+    <label class="alamat txt-poppins-10"><b>Alamat</b><br /><br />Bagian Humas <br />Gedung B.J Habibie Lantai 14
+      <br />Jl M.H Thamrin No.8 Jakarta Pusat <br />DKI Jakarta 10340 </label>
+    <label class="fax txt-poppins-10"><b>Telepon</b><br /><br />
+      (021) 316 9457 <br />(021) 398 38729</label>
+    <label class="email txt-poppins-10"><b>Email</b><br /><br />
+      humas@bppt.go.id
+    </label>
+
+    <div class="row sosmed">
+      <a href="https://www.instagram.com/bppt_ri" target="_blank"><img src="img/custom_icons/logo-instagram.svg"
+          alt="instagram" style="margin-left: 0" /></a>
+      <a href="https://web.facebook.com/BPPTRI/?_rdc=1&_rdr/" target="_blank"><img
+          src="img/custom_icons/logo-facebook.svg" alt="facebook" /></a>
+      <a href="https://twitter.com/bppt_ri?lang=en" target="_blank"><img src="img/custom_icons/logo-twitter.svg"
+          alt="twitter" /></a>
+      <a href="https://www.youtube.com/channel/UCTqpJRtdswcFupxEZIjvr9w" target="_blank"><img
+          src="img/custom_icons/logo-youtube.svg" alt="youtube" /></a>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel-prediksi">
+      <div style="margin-top: 15px"></div>
+      <span class="title purple txt-poppins-14">POTENSI HOTSPOT</span>
+      <div class="col-sm-4">
+        <label class="txt-inter-18 saatini">{{phssaatini}}</label>
+      </div>
+      <div class="col-sm-4">
+        <label class="lbl-periode txt-poppins-8" style="color: #444444">Bulan ini</label>
+        <label class="lbl-saatini txt-poppins-9">Sebelumnya</label>
+        <span class="txt-poppins-8" id="jum-titik-sebelumnya">
+          <div style="margin-top: 3px"></div>
+          <b>{{phssebelumnya}}</b>
+        </span>
+        <label class="lbl-sebelumnya txt-poppins-9">Presentase : </label>
+        <div ng-show="turun">
+          <span class="panel-persentase txt-poppins-9 bg-green green" id="prediksi-sebelumnya">
+            <img src="img/custom_icons/arrow-green.svg" />
+            - {{phspersentase}} %
+          </span>
+        </div>
+        <div ng-show="naik">
+          <span class="panel-persentase txt-poppins-8 bg-red red" id="prediksi-sebelumnya">
+            <img src="img/custom_icons/arrow-red.svg" />
+            + {{phspersentase}} %
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-hotspot">
+      <div style="margin-top: 15px"></div>
+      <span class="title blue txt-poppins-14">HOTSPOT SATELIT</span>
+      <div class="col-sm-4">
+        <label class="txt-inter-18 saatini">{{hssaatini}}</label>
+      </div>
+      <div class="col-sm-4">
+        <label class="lbl-periode txt-poppins-8" style="color: #444444">Bulan ini</label>
+        <label class="lbl-saatini txt-poppins-9">Sebelumnya</label>
+        <span class="txt-poppins-8" id="jum-titik-sebelumnya">
+          <div style="margin-top: 3px"></div>
+          <b>{{hssebelumnya}}</b>
+        </span>
+        <label class="lbl-sebelumnya txt-poppins-9">Presentase : </label>
+        <div ng-show="turun">
+          <span class="panel-persentase txt-poppins-9 bg-green green" id="prediksi-sebelumnya">
+            <img src="img/custom_icons/arrow-green.svg" />
+            - {{hspersentase}} %
+          </span>
+        </div>
+        <div ng-show="naik">
+          <span class="panel-persentase txt-poppins-9 bg-red red" id="prediksi-sebelumnya">
+            <img src="img/custom_icons/arrow-red.svg" />
+            <label>+{{hspersentase}}%</label>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-devegetasi">
+      <div style="margin-top: 15px"></div>
+      <span class="title green txt-poppins-14">DEVEGETASI</span>
+      <div class="col-sm-4">
+        <label class="txt-inter-18 saatini">{{vegsaatini}}</label>
+      </div>
+      <div class="col-sm-4">
+        <label class="lbl-periode txt-poppins-8" style="color: #444444">Bulan ini</label>
+        <label class="lbl-saatini txt-poppins-9">Sebelumnya</label>
+        <span class="txt-poppins-8" id="jum-titik-sebelumnya">
+          <div style="margin-top: 3px"></div>
+          <b>{{vegsebelumnya}}</b>
+        </span>
+        <label class="lbl-sebelumnya txt-poppins-9">Presentase : </label>
+        <div ng-show="turun">
+          <span class="panel-persentase txt-poppins-9 bg-green green" id="prediksi-sebelumnya">
+            <img src="img/custom_icons/arrow-green.svg" />
+            - {{vegpersentase}} %
+          </span>
+        </div>
+        <div ng-show="naik">
+          <span class="panel-persentase txt-poppins-9 bg-red red" id="prediksi-sebelumnya">
+            <img src="img/custom_icons/arrow-red.svg" />
+            + {{vegpersentase}} %
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
